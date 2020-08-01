@@ -33,15 +33,15 @@ def main():
     Play = Player()
     barra = Barra1()
     escudo = Escudo(screen)
-    vida1 = vida(bax+165,bay)
-    expe = vida(bax+290, bay)
+    vida1 = vida(bax+163,bay)
+    expe = vida(bax+285, bay)
     lazul = Lancero1()
     eazul = Lancero2()
 
     all_sprites.add(escudo)
 
     #generacion de enemigos (se pasara a una clase cuando se termine)
-    for i in range(5):
+    for i in range(8):
         lazul = Lancero1()
         lancerolvl1.add(lazul)
         all_sprites.add(lazul)
