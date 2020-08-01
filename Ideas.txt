@@ -1,0 +1,27 @@
+
+trompo ninja tails (TNT)
+
+- lluvia en el menu
+
+- girp == mana
+
+- poderes con 1,2,3,4
+
+- se mueve con wasd pero con un poder pasa a moverse con el mouse
+
+- con otro poder dispara a todas las direcciones churikens (1,2,3) veces
+
+- con otro desaparece por (3,4,5) segundos
+
+- dano x (2,3,4) por (1,2,3) segundos
+
+- obstaculos y enemigos
+
+- pega con espacio
+
+-cada nivel con un mapa grande
+
+- estilo de dibujo semi antiguo
+
+- primero en pc, despues en wb y despues a android
+
