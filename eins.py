@@ -33,7 +33,7 @@ def main():
     Play = Player()
     barra = Barra1()
     escudo = Escudo(screen)
-    vida1 = vida(bax+162,bay)
+    vida1 = vida(bax+165,bay)
     expe = vida(bax+285, bay)
     lazul = Lancero1()
     eazul = Lancero2()
