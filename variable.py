@@ -33,7 +33,7 @@ mflenor = 1
 mflefir = 2
 
 ##Flechas
-#Velocidad de flechas normales
+#Velocidad de flechas 
 Nspeed = 10
 
 ##Enemigos
