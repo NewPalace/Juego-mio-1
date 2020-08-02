@@ -1,0 +1,4 @@
+-Se modifico el main para agregar la funcionalidad del gameover
+Disclaimed:
+    - Gameover no terminado, falta agregar mas casos y posibles niveles. Se planea hacerla una clase pero 
+      ta yuca debido a que usa variables que se inicializan con la misma, ya se vera, todo tiene solucion c:.
