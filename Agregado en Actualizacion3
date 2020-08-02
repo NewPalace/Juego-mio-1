@@ -2,3 +2,8 @@
 Disclaimed:
     - Gameover no terminado, falta agregar mas casos y posibles niveles. Se planea hacerla una clase pero 
       ta yuca debido a que usa variables que se inicializan con la misma, ya se vera, todo tiene solucion c:.
+
+Actualizacion 3.1:
+  - Error menor:
+        - Me olvide de borrar la inicializacion de la clase Gameover (se creo, pero por disitintos errores se descarto)
+        

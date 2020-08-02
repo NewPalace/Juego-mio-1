@@ -1,6 +1,6 @@
 import pygame, random
 from clases import Player, General1, Lancero1, Lancero2, vida
-from clases import  Fondo, Muro1, Barra1, imagenblock, Escudo, Game_Over
+from clases import  Fondo, Muro1, Barra1, imagenblock, Escudo
 from variable import white,skyblue, green, black,green, sc_ancho, sc_largo, ticK, Textbarup, bax, bay, Nfle, Lanlvl1, explanlv1
 from variable import mflefir, mflenor
 from Imagenes import  Icono
@@ -26,7 +26,6 @@ def main():
     lazul = Lancero1()
     eazul = Lancero2()
     NumeroDeFlechas = vida(bax+38,bay+25)
-    Gameo = Game_Over(screen)
 
     #Personalizacion de la ventana
     pygame.display.set_caption(Textbarup)
@@ -148,7 +147,8 @@ def main():
                 game_over =True
             
         all_sprites.update()
-            
+
+
         Play.handle_event(event)
 
 
