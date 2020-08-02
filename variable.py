@@ -28,11 +28,8 @@ BalleSpeed = 10
 Nfle = 50
 #Cantidad de flechas perdidas por flecha normal
 mflenor = 1
-
 #Cantidad de flechas perdidas por flecha de fuego
 mflefir = 2
-
-##Flechas
 #Velocidad de flechas 
 Nspeed = 10
 

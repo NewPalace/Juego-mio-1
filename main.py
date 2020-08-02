@@ -49,7 +49,7 @@ def main():
             pygame.display.flip()
             waiting = True
             while waiting:
-                clock.tick(60)
+                clock.tick(ticK)
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
@@ -71,14 +71,14 @@ def main():
             Flechas = Nfle
  
             #generacion de enemigos (se pasara a una clase cuando se termine)
-            #Lanceros
+            #Lanceros 1
             for i in range(Lanlvl1):
                 lazul = Lancero1()
                 lancerolvl1.add(lazul)
                 all_sprites.add(lazul)
             
-            #Escuderos
-
+            #Lanceros 2
+            #Aca iria el loop que generaria los lanceros
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
