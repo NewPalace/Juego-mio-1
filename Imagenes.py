@@ -22,12 +22,11 @@ Ballesta_anim = "Assets/BallestaA1.png"
 #General
 General = "Assets/General_rojoAnim.png"
 
-#Caballos
-
 ##Flechas
 #Normal:
 Nflecha = "Assets/Flecha.png"
 #Fuego:
+Fflecha = "Assets/FlechaFire.png"
 
 #------------Azules---------------
 #Lancero comun

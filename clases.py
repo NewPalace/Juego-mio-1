@@ -1,7 +1,7 @@
 import pygame,random
 from variable import white, black, green, brown, sc_ancho, sc_largo,BalleSpeed, Nspeed, bax, bay
-from Imagenes import General, background1,Ballesta_anim, Nflecha, muro1,barra, LanceroAC, LanceroAE, murolvl1, Protector
-from Controles import Disparo1, SubirUP, BajarDo
+from Imagenes import General, background1,Ballesta_anim, Nflecha, Fflecha, muro1,barra, LanceroAC, LanceroAE, murolvl1, Protector
+from Controles import SubirUP, BajarDo, Ffire, Fnormal
 pygame.init()
 
 ##--------------Clase en pruebas (costo computacional elevado; razon: desconocida)----------------
@@ -84,7 +84,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.bottom = sc_ancho //2
         self.frame = 0
         self.refill = {0: (0,0,134,99), 1: (141,0,134,99)}
-    
+        self.refill2 = {0: (0,99,134,99), 1: (141,99,134,99)}
+
     def get_frame(self, frame_set):
         self.frame += 1
         if self.frame > (len(frame_set)-1):
@@ -113,38 +114,61 @@ class Player(pygame.sprite.Sprite):
 
         if direction == 'stop':
             self.rect.y += 0
-
-
-        if direction == 'shot':
+    
+        if direction == 'Fnormal D':
             self.clip(self.refill)
-
-        if direction == 'recarga':
+        
+        if direction == 'Fnormal R':
             self.clip(self.refill[0])
+
+        if direction == 'Ffire D':
+            self.clip(self.refill2)
+        
+        if direction == 'Ffire R':
+            self.clip(self.refill2[0])
+        
+        #if self.TipoF == "fire":
+            #if direction == 'shot':
+             #   self.clip(self.refill2)
+            #if direction == 'recarga':
+             #   self.clip(self.refill2[0])
 
         self.image = self.sheet.subsurface(self.sheet.get_clip())
 
     def handle_event(self, event):
         #Agregat otro if para disparar con el mouse
         if event.type == pygame.KEYDOWN:
-            if event.key == Disparo1:
-                self.update('shot')
+
             if event.key == SubirUP:
                 self.update('up')
             if event.key == BajarDo:
-                self.update('down')                
-            
+                self.update('down') 
+
+            if event.key == Fnormal:
+                self.update('Fnormal D')
+            if event.key == Ffire:
+                self.update('Ffire D')
+
         if event.type == pygame.KEYUP:
-            if event.key == Disparo1:
-                self.update('recarga')
+
             if event.key == SubirUP:
                 self.update('stop')
             if event.key == BajarDo:
-                self.update('stop')   
+                self.update('stop')  
+            if event.key == Fnormal:
+                self.update('Fnormal R')
+            if event.key == Ffire:
+                self.update('Ffire R')
 
     def Nshoot(self, bullets, all_sprites):
-        bullet = NArrows(self.rect.right, self.rect.centery)
+        bullet = NArrows(self.rect.right, self.rect.centery,Nflecha )
         all_sprites.add(bullet)
         bullets.add(bullet)
+
+    def Fshoot(self, bullets, all_sprites):
+        bullet = NArrows(self.rect.right, self.rect.centery, Fflecha)
+        all_sprites.add(bullet)
+        bullets.add(bullet)  
 
 class General1(pygame.sprite.Sprite):
     def __init__(self):
@@ -166,9 +190,9 @@ class General1(pygame.sprite.Sprite):
         pass
 
 class NArrows(pygame.sprite.Sprite):
-    def __init__(self,x,y):
+    def __init__(self,x,y,Pflecha):
         super().__init__()
-        self.image = pygame.image.load(Nflecha)
+        self.image = pygame.image.load(Pflecha)
         self.image.set_colorkey(white)
         self.rect = self.image.get_rect()
         self.rect.centery = y
@@ -243,6 +267,13 @@ class vida(pygame.sprite.Sprite):
         self.fill = pygame.Rect(self.rect.x,self.rect.y+5,70,self.fill)
         pygame.draw.rect(surface, color, self.fill)
         surface.blit(self.image, self.rect)
+
+    def draw_text(self,surface, text, size):
+        self.font = pygame.font.SysFont("serif", size)
+        self.text_surface = self.font.render(text, True, white)
+        self.text_rect = self.text_surface.get_rect()
+        self.text_rect = (self.rect.x, self.rect.y)
+        surface.blit(self.text_surface, self.text_rect)
 
 
 

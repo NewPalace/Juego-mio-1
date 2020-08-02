@@ -5,6 +5,7 @@ black = (  0,  0,  0)
 green = (120,179, 69)
 brown = ( 92, 36,  3)
 skyblue = ( 36,201,255)
+
 ##pantalla
 #Dimenciones
 sc_ancho = 775
@@ -23,7 +24,20 @@ ticK = 60
 ticKBallesta =30
 #velocidad
 BalleSpeed = 10
+#Cantidad de flechas
+Nfle = 50
+#Cantidad de flechas perdidas por flecha normal
+mflenor = 1
+
+#Cantidad de flechas perdidas por flecha de fuego
+mflefir = 2
 
 ##Flechas
 #Velocidad de flechas normales
 Nspeed = 10
+
+##Enemigos
+#Cantidad de lanceros lvl1
+Lanlvl1 = 2
+#Cantidad de xp por matar a lanceros lvl1
+explanlv1 = 5

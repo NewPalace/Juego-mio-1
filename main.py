@@ -1,9 +1,10 @@
 import pygame, random
 from clases import Player, General1, Lancero1, Lancero2, vida
 from clases import  Fondo, Muro1, Barra1, imagenblock, Escudo
-from variable import white,skyblue, green, black,green, sc_ancho, sc_largo, ticK, Textbarup, bax, bay
+from variable import white,skyblue, green, black,green, sc_ancho, sc_largo, ticK, Textbarup, bax, bay, Nfle, Lanlvl1, explanlv1
+from variable import mflefir, mflenor
 from Imagenes import  Icono
-from Controles import Disparo1
+from Controles import Fnormal, Ffire
 
 pygame.mixer.init()
 
@@ -12,6 +13,7 @@ def main():
     screen = pygame.display.set_mode([sc_largo, sc_ancho])
     clock = pygame.time.Clock()
     score = 0
+    Flechas = Nfle
 
     #Personalizacion de la ventana
     pygame.display.set_caption(Textbarup)
@@ -25,6 +27,7 @@ def main():
     lancerolvl2 = pygame.sprite.Group()
     lancerolvl22 = pygame.sprite.Group()
     bullets = pygame.sprite.Group()
+    bullets2 = pygame.sprite.Group()
 
     #"inicializacion" de clases
     fondo = Fondo()
@@ -37,18 +40,19 @@ def main():
     expe = vida(bax+285, bay)
     lazul = Lancero1()
     eazul = Lancero2()
+    NumeroDeFlechas = vida(bax+38,bay+25)
 
     all_sprites.add(escudo)
 
     #generacion de enemigos (se pasara a una clase cuando se termine)
-    for i in range(8):
+    for i in range(Lanlvl1):
         lazul = Lancero1()
         lancerolvl1.add(lazul)
         all_sprites.add(lazul)
-    for i in range(1):
-        eazul = Lancero2()
-        lancerolvl2.add(eazul)
-        all_sprites.add(eazul)
+    #for i in range(1):
+     #   eazul = Lancero2()
+      #  lancerolvl2.add(eazul)
+       # all_sprites.add(eazul)
     #eazul1 = Lancero2()
     #eazul2 = Lancero2()
     #eazul3 = Lancero2()
@@ -71,9 +75,12 @@ def main():
             if event.type == pygame.QUIT:
                 done = True
             elif event.type == pygame.KEYDOWN:
-                if event.key == Disparo1:
+                if event.key == Fnormal:
                     Play.Nshoot(bullets, all_sprites)
-
+                    Flechas -= mflenor
+                if event.key == Ffire:
+                    Play.Fshoot(bullets2,all_sprites)
+                    Flechas -= mflefir
         #Imagen de fondo  
         screen.blit(fondo.image, fondo.rect)
         all_sprites.draw(screen)
@@ -85,7 +92,13 @@ def main():
             lazul = Lancero1()
             lancerolvl1.add(lazul)
             all_sprites.add(lazul)
-            score += 1
+            score += explanlv1
+        hits3 = pygame.sprite.groupcollide(lancerolvl1, bullets2, True, True)
+        for hit in hits3:
+            lazul = Lancero1()
+            lancerolvl1.add(lazul)
+            all_sprites.add(lazul)
+            score += explanlv1
 
         ##Lancero 2
         if eazul.life == 2:
@@ -138,6 +151,8 @@ def main():
         screen.blit(barra.image, barra.rect)
         vida1.draw_shield_bar(screen, escudo.shield, green)
         expe.draw_shield_bar(screen,score,skyblue)
+        NumeroDeFlechas.draw_text(screen, str(Flechas), 15)
+
         #General
         screen.blit(general.image, general.rect)
 
