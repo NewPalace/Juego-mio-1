@@ -1,0 +1,3 @@
+- Se agrego una pantalla distinta para el inicio del juego y otra para cuando pierdes
+- Se agrego la variable "vidamuralla" para controlar la misma y se arreglo bug que revivias 
+  con la misma vida 

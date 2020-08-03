@@ -15,6 +15,8 @@ Textbarup = "Defend!"
 #Posicion de la barra de accion:
 bax = 281
 bay = 680
+#Vida de la muralla:
+vidamuralla = 100
 
 #ticks del reloj
 ticK = 60

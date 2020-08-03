@@ -1,5 +1,5 @@
 import pygame,random
-from variable import white, black, green, brown, sc_ancho, sc_largo,BalleSpeed, Nspeed, bax, bay
+from variable import white, black, green, brown, sc_ancho, sc_largo,BalleSpeed, Nspeed, bax, bay, vidamuralla
 from Imagenes import General, background1,Ballesta_anim, Nflecha, Fflecha, muro1,barra, LanceroAC, LanceroAE, murolvl1, Protector
 from Controles import SubirUP, BajarDo, Ffire, Fnormal
 pygame.init()
@@ -25,7 +25,7 @@ class imagenblock(pygame.sprite.Sprite):
 class Escudo(pygame.sprite.Sprite):
     def __init__(self, screen):
         super().__init__()
-        self.shield = 100
+        self.shield = vidamuralla
         self.image = pygame.image.load(murolvl1).convert()
         self.image.set_colorkey(white)
         self.rect = self.image.get_rect()

@@ -2,7 +2,7 @@ import pygame, random
 from clases import Player, General1, Lancero1, Lancero2, vida
 from clases import  Fondo, Muro1, Barra1, imagenblock, Escudo
 from variable import white,skyblue, green, black,green, sc_ancho, sc_largo, ticK, Textbarup, bax, bay, Nfle, Lanlvl1, explanlv1
-from variable import mflefir, mflenor
+from variable import mflefir, mflenor, vidamuralla
 from Imagenes import  Icono
 from Controles import Fnormal, Ffire
 
@@ -35,29 +35,53 @@ def main():
   
     game_over = True
     done = False
-
+    Primeravez = 0
     while not done:
+        #------------------------------------------------------------------Gameovers
         if game_over:
-
-            #Gameo.show_go_screen()
-            Texto_1 = vida(bax+80,sc_ancho//3)
-            Texto_2 = vida(bax+225,sc_ancho//2)
-            Texto_3 = vida(bax+250,sc_ancho*2//3)
-            Texto_1.draw_text(screen, "OE PERDISTE? xd", 65)
-            Texto_2.draw_text(screen, "Na mentira, xd", 25)
-            Texto_3.draw_text(screen, "Press SPACE", 20)
-            pygame.display.flip()
-            waiting = True
-            while waiting:
-                clock.tick(ticK)
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                    if event.type == pygame.KEYUP:
-                        if event.key == pygame.K_SPACE:
-                            waiting = False
-#----------------------------------------------------------------------------
+            if Primeravez == 0:
+                Texto_1 = vida(bax+40,sc_ancho//3)
+                Texto_2 = vida(bax+60,sc_ancho//2)
+                Texto_22 = vida(bax+60,sc_ancho//2+25)
+                Texto_3 = vida(bax+250,sc_ancho*2//3)
+                Texto_1.draw_text(screen, "Defiende la mueralla!!", 65)
+                Texto_2.draw_text(screen, "- Pierdes si se te acaban las flechas o te quedas sin vida", 25)
+                Texto_22.draw_text(screen, "- Ganas si completas el cuadro celeste (score)", 25)
+                Texto_3.draw_text(screen, "Press SPACE", 20)
+                pygame.display.flip()
+                waiting = True
+                escudo.shield = vidamuralla
+                while waiting:
+                    clock.tick(ticK)
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            pygame.quit()
+                        if event.type == pygame.KEYUP:
+                            if event.key == pygame.K_SPACE:
+                                waiting = False
+            
+            if Primeravez > 0 :
+                Texto_1 = vida(bax+60,sc_ancho//3)
+                Texto_2 = vida(bax+180,sc_ancho//2)
+                Texto_3 = vida(bax+250,sc_ancho*2//3)
+                Texto_1.draw_text(screen, "OE PERDISTE? xd", 65)
+                Texto_2.draw_text(screen, "Na mentira, intenta de nuevo!", 25)
+                Texto_3.draw_text(screen, "Press SPACE", 20)
+                pygame.display.flip()
+                waiting = True
+                escudo.shield = vidamuralla
+                while waiting:
+                    clock.tick(ticK)
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            pygame.quit()
+                        if event.type == pygame.KEYUP:
+                            if event.key == pygame.K_SPACE:
+                                waiting = False
+        
+            Primeravez = Primeravez + 1
             game_over = False
+        #----------------------------------------------------------------------------
             #Guardado de sprites
             all_sprites = pygame.sprite.Group()
             lancerolvl1 = pygame.sprite.Group()
