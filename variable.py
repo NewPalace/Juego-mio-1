@@ -27,7 +27,7 @@ ticKBallesta =30
 #velocidad
 BalleSpeed = 10
 #Cantidad de flechas
-Nfle = 50
+Nfle = 60
 #Cantidad de flechas perdidas por flecha normal
 mflenor = 1
 #Cantidad de flechas perdidas por flecha de fuego

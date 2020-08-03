@@ -36,6 +36,7 @@ def main():
     Normal = True
     Fuego = False
     game_over = True
+    Win = False
     done = False
     Primeravez = 0
     while not done:
@@ -80,15 +81,13 @@ def main():
                         if event.type == pygame.KEYUP:
                             if event.key == pygame.K_SPACE:
                                 waiting = False
-        
             Primeravez = Primeravez + 1
             game_over = False
-        #----------------------------------------------------------------------------
+
             #Guardado de sprites
             all_sprites = pygame.sprite.Group()
             lancerolvl1 = pygame.sprite.Group()
             lancerolvl2 = pygame.sprite.Group()
-            lancerolvl22 = pygame.sprite.Group()
             bullets = pygame.sprite.Group()
             bullets2 = pygame.sprite.Group()
 
@@ -106,6 +105,53 @@ def main():
             #Lanceros 2
             #Aca iria el loop que generaria los lanceros
 
+        if Win == True:
+            Texto_1 = vida(bax+60,sc_ancho//3)
+            Texto_2 = vida(bax+120,sc_ancho//2)
+            Texto_22 = vida(bax+120,sc_ancho//2+25)
+            Texto_3 = vida(bax+250,sc_ancho*2//3)
+            Texto_1.draw_text(screen, "Ganaste agilado!", 65)
+            Texto_2.draw_text(screen, "- LLegas a otra partidita", 25)
+            Texto_22.draw_text(screen, "- O te achicas?", 25)
+            Texto_3.draw_text(screen, "Press SPACE", 20)
+            pygame.display.flip()
+            waiting = True
+            escudo.shield = vidamuralla
+            while waiting:
+                clock.tick(ticK)
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                    if event.type == pygame.KEYUP:
+                        if event.key == pygame.K_SPACE:
+                            waiting = False
+        
+            Primeravez = Primeravez + 1
+            Win = False
+
+            #Guardado de sprites
+            all_sprites = pygame.sprite.Group()
+            lancerolvl1 = pygame.sprite.Group()
+            lancerolvl2 = pygame.sprite.Group()
+            bullets = pygame.sprite.Group()
+            bullets2 = pygame.sprite.Group()
+
+            all_sprites.add(escudo)
+            score = 0
+            Flechas = Nfle
+ 
+            #generacion de enemigos (se pasara a una clase cuando se termine)
+            #Lanceros 1
+            for i in range(Lanlvl1):
+                lazul = Lancero1()
+                lancerolvl1.add(lazul)
+                all_sprites.add(lazul)
+            
+            #Lanceros 2
+            #Aca iria el loop que generaria los lanceros
+
+
+        #----------------------------------------------------------------------------
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
@@ -141,6 +187,7 @@ def main():
             lancerolvl1.add(lazul)
             all_sprites.add(lazul)
             score += explanlv1
+
         hits3 = pygame.sprite.groupcollide(lancerolvl1, bullets2, True, True)
         for hit in hits3:
             lazul = Lancero1()
@@ -148,25 +195,11 @@ def main():
             all_sprites.add(lazul)
             score += explanlv1
 
+        if score == 100:
+            Win = True
+
         ##Lancero 2
-        if eazul.life == 2:
-            hits1 = pygame.sprite.groupcollide(lancerolvl2, bullets, False, True)
-                    #eazul.sheet.set_clip(pygame.Rect(Play.get_frame(eazul.sescudo)))
-                    #eazul.image = eazul.sheet.subsurface(eazul.sheet.get_clip())
-                    #eazul.life = eazul.life - 1
-            for hit in hits1:
-                hit.sheet.set_clip(pygame.Rect(Play.get_frame(eazul.sescudo)))
-                hit.image = hit.sheet.subsurface(hit.sheet.get_clip())
-                hit.life = 1
-               
-        if eazul.life == 1:                                           
-            hits2 = pygame.sprite.groupcollide(lancerolvl2, bullets, True, True)
-            #all_sprites.remove(e)
-            for hit in hits2:
-                eazul = Lancero2()
-                lancerolvl2.add(eazul)
-                all_sprites.add(eazul)
-                score += 2
+        #Aca iria el codigo que reconoce la colicion de el lancero con escudo y la flecha
 
         #Barra de vida
         hits = pygame.sprite.spritecollide(escudo, lancerolvl1, False)

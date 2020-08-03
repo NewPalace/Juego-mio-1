@@ -127,12 +127,6 @@ class Player(pygame.sprite.Sprite):
         if direction == 'Ffire R':
             self.clip(self.refill2[0])
         
-        #if self.TipoF == "fire":
-            #if direction == 'shot':
-             #   self.clip(self.refill2)
-            #if direction == 'recarga':
-             #   self.clip(self.refill2[0])
-
         self.image = self.sheet.subsurface(self.sheet.get_clip())
 
     def handle_event(self, event, normal, fuego):

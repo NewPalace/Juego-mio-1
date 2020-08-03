@@ -1,2 +1,4 @@
 - Problemas con la generacion de los lanceros con escudo (Animacion erronea)
+        - Posible solucion seria convertir al escudo como un ente aparte 
+
 - Cuando llega a la ultima flecha, reconoce primero el gameover y despues la victoria
