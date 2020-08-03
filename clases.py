@@ -1,7 +1,7 @@
 import pygame,random
 from variable import white, black, green, brown, sc_ancho, sc_largo,BalleSpeed, Nspeed, bax, bay, vidamuralla
 from Imagenes import General, background1,Ballesta_anim, Nflecha, Fflecha, muro1,barra, LanceroAC, LanceroAE, murolvl1, Protector
-from Controles import SubirUP, BajarDo, Ffire, Fnormal
+from Controles import SubirUP, BajarDo, F_fuego, F_normal, Fnormal
 pygame.init()
 
 ##--------------Clase en pruebas (costo computacional elevado; razon: desconocida)----------------
@@ -135,7 +135,7 @@ class Player(pygame.sprite.Sprite):
 
         self.image = self.sheet.subsurface(self.sheet.get_clip())
 
-    def handle_event(self, event):
+    def handle_event(self, event, normal, fuego):
         #Agregat otro if para disparar con el mouse
         if event.type == pygame.KEYDOWN:
 
@@ -144,21 +144,29 @@ class Player(pygame.sprite.Sprite):
             if event.key == BajarDo:
                 self.update('down') 
 
-            if event.key == Fnormal:
-                self.update('Fnormal D')
-            if event.key == Ffire:
-                self.update('Ffire D')
+            if normal == True:
+                if event.key == Fnormal:
+                    self.update('Fnormal D')
+            if fuego == True:
+                if event.key == Fnormal:
+                    self.update('Ffire D')
 
         if event.type == pygame.KEYUP:
 
             if event.key == SubirUP:
                 self.update('stop')
             if event.key == BajarDo:
-                self.update('stop')  
-            if event.key == Fnormal:
+                self.update('stop') 
+            if event.key == F_normal:
                 self.update('Fnormal R')
-            if event.key == Ffire:
+            if event.key == F_fuego:
                 self.update('Ffire R')
+            if normal == True: 
+                if event.key == Fnormal:
+                    self.update('Fnormal R')
+            if fuego == True:
+                if event.key == Fnormal:
+                    self.update('Ffire R')
 
     def Nshoot(self, bullets, all_sprites):
         bullet = NArrows(self.rect.right, self.rect.centery,Nflecha )

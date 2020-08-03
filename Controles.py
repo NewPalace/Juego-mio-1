@@ -3,10 +3,12 @@ import pygame
 pygame.init()
 
 ##Poderes:
-#Disparar flecha normal (Para camiar al mouse se tiene que cambiar mas cosas del codigo)
+#Disparar 
 Fnormal = pygame.K_j
-#Disparar flecha de fuego (Para camiar al mouse se tiene que cambiar mas cosas del codigo)
-Ffire = pygame.K_i
+#Poder Normal
+F_normal = pygame.K_1
+#Poder Fuego
+F_fuego = pygame.K_2
 
 #subir:
 SubirUP = pygame.K_w

@@ -4,7 +4,7 @@ from clases import  Fondo, Muro1, Barra1, imagenblock, Escudo
 from variable import white,skyblue, green, black,green, sc_ancho, sc_largo, ticK, Textbarup, bax, bay, Nfle, Lanlvl1, explanlv1
 from variable import mflefir, mflenor, vidamuralla
 from Imagenes import  Icono
-from Controles import Fnormal, Ffire
+from Controles import Fnormal, F_fuego, F_normal
 
 pygame.init()
 pygame.mixer.init()
@@ -32,7 +32,9 @@ def main():
     icon = pygame.image.load(Icono)
     icon.set_colorkey(black)
     pygame.display.set_icon(icon)
-  
+    
+    Normal = True
+    Fuego = False
     game_over = True
     done = False
     Primeravez = 0
@@ -44,7 +46,7 @@ def main():
                 Texto_2 = vida(bax+60,sc_ancho//2)
                 Texto_22 = vida(bax+60,sc_ancho//2+25)
                 Texto_3 = vida(bax+250,sc_ancho*2//3)
-                Texto_1.draw_text(screen, "Defiende la mueralla!!", 65)
+                Texto_1.draw_text(screen, "Defiende la muralla!!", 65)
                 Texto_2.draw_text(screen, "- Pierdes si se te acaban las flechas o te quedas sin vida", 25)
                 Texto_22.draw_text(screen, "- Ganas si completas el cuadro celeste (score)", 25)
                 Texto_3.draw_text(screen, "Press SPACE", 20)
@@ -108,16 +110,25 @@ def main():
             if event.type == pygame.QUIT:
                 done = True
             elif event.type == pygame.KEYDOWN:
-                if event.key == Fnormal:
-                    Play.Nshoot(bullets, all_sprites)
-                    Flechas -= mflenor
-                    if Flechas <= 0:
-                        game_over = True
-                if event.key == Ffire:
-                    Play.Fshoot(bullets2,all_sprites)
-                    Flechas -= mflefir
-                    if Flechas <= 0:
-                        game_over = True
+                if event.key == F_normal:
+                    Normal = True
+                    Fuego = False
+                if event.key == F_fuego:
+                    Normal = False
+                    Fuego = True
+
+                if Normal == True:
+                    if event.key == Fnormal:
+                        Play.Nshoot(bullets, all_sprites)
+                        Flechas -= mflenor
+                        if Flechas <= 0:
+                            game_over = True
+                if Fuego == True:
+                    if event.key == Fnormal:
+                        Play.Fshoot(bullets2,all_sprites)
+                        Flechas -= mflefir
+                        if Flechas <= 0:
+                            game_over = True
         #Imagen de fondo  
         screen.blit(fondo.image, fondo.rect)
         all_sprites.draw(screen)
@@ -173,7 +184,7 @@ def main():
         all_sprites.update()
 
 
-        Play.handle_event(event)
+        Play.handle_event(event,Normal,Fuego)
 
 
         #Escudo de la muralla

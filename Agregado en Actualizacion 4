@@ -1,3 +1,9 @@
 - Se agrego una pantalla distinta para el inicio del juego y otra para cuando pierdes
 - Se agrego la variable "vidamuralla" para controlar la misma y se arreglo bug que revivias 
   con la misma vida 
+
+- Actualizacion 4.1:
+    - Se cambiaron los controles:
+        - Ahora si presionas "1" la ballesta dispara flechas normales si le das "j"
+        - Ahora si presionas "2" la ballesta dispara flechas normales si le das "j"
+        - Todos los controles se pueden modificar en el modulo de controles
