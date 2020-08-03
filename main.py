@@ -13,6 +13,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode([sc_largo, sc_ancho])
     clock = pygame.time.Clock()
+    
 
     #"inicializacion" de clases
     fondo = Fondo()
@@ -25,6 +26,8 @@ def main():
     expe = vida(bax+285, bay)
     lazul = Lancero1()
     eazul = Lancero2()
+    tiempo = vida(60, 3)
+    TextoTiempo = vida(5, 3)
     NumeroDeFlechas = vida(bax+38,bay+25)
 
     #Personalizacion de la ventana
@@ -53,6 +56,7 @@ def main():
                 Texto_3.draw_text(screen, "Press SPACE", 20)
                 pygame.display.flip()
                 waiting = True
+                
                 escudo.shield = vidamuralla
                 while waiting:
                     clock.tick(ticK)
@@ -62,6 +66,9 @@ def main():
                         if event.type == pygame.KEYUP:
                             if event.key == pygame.K_SPACE:
                                 waiting = False
+                                Time = 0
+                                Time = pygame.time.get_ticks()
+                                
             
             if Primeravez > 0 :
                 Texto_1 = vida(bax+60,sc_ancho//3)
@@ -72,6 +79,7 @@ def main():
                 Texto_3.draw_text(screen, "Press SPACE", 20)
                 pygame.display.flip()
                 waiting = True
+                
                 escudo.shield = vidamuralla
                 while waiting:
                     clock.tick(ticK)
@@ -81,6 +89,9 @@ def main():
                         if event.type == pygame.KEYUP:
                             if event.key == pygame.K_SPACE:
                                 waiting = False
+                                Time = 0
+                                Time = pygame.time.get_ticks()
+                                
             Primeravez = Primeravez + 1
             game_over = False
 
@@ -104,18 +115,24 @@ def main():
             
             #Lanceros 2
             #Aca iria el loop que generaria los lanceros
+            #Time = 0
+            
+            
 
         if Win == True:
             Texto_1 = vida(bax+60,sc_ancho//3)
-            Texto_2 = vida(bax+120,sc_ancho//2)
-            Texto_22 = vida(bax+120,sc_ancho//2+25)
-            Texto_3 = vida(bax+250,sc_ancho*2//3)
+            Texto_2 = vida(bax+290,sc_ancho//2)
+            texto_22 = vida(bax+ 190, sc_ancho//2)
+            Texto_3 = vida(bax+80,sc_ancho//2+25)
+            Texto_4 = vida(bax+230,sc_ancho*2//3)
             Texto_1.draw_text(screen, "Ganaste agilado!", 65)
-            Texto_2.draw_text(screen, "- LLegas a otra partidita", 25)
-            Texto_22.draw_text(screen, "- O te achicas?", 25)
-            Texto_3.draw_text(screen, "Press SPACE", 20)
+            texto_22.draw_text(screen, "Tiempo: ", 25)
+            Texto_2.draw_text(screen, str(round((Time2 - Time)/1000)), 25)
+            Texto_3.draw_text(screen, "Buen tiempo loco, lo podras mejorar?", 25)
+            Texto_4.draw_text(screen, "Press SPACE", 20)
             pygame.display.flip()
             waiting = True
+            
             escudo.shield = vidamuralla
             while waiting:
                 clock.tick(ticK)
@@ -125,6 +142,8 @@ def main():
                     if event.type == pygame.KEYUP:
                         if event.key == pygame.K_SPACE:
                             waiting = False
+                            Time = 0
+                            Time = pygame.time.get_ticks()
         
             Primeravez = Primeravez + 1
             Win = False
@@ -150,6 +169,9 @@ def main():
             #Lanceros 2
             #Aca iria el loop que generaria los lanceros
 
+            #Time = 0
+            #Time = pygame.time.get_ticks()
+            #tiempo.draw_text(screen, Time, 34 )
 
         #----------------------------------------------------------------------------
         for event in pygame.event.get():
@@ -175,6 +197,9 @@ def main():
                         Flechas -= mflefir
                         if Flechas <= 0:
                             game_over = True
+                    
+                    
+
         #Imagen de fondo  
         screen.blit(fondo.image, fondo.rect)
         all_sprites.draw(screen)
@@ -237,6 +262,13 @@ def main():
 
         #General
         screen.blit(general.image, general.rect)
+
+        #Reloj
+        
+        Time2 = pygame.time.get_ticks()
+        
+        TextoTiempo.draw_text(screen, "Time: ", 15)
+        tiempo.draw_text(screen, str(round((Time2 - Time)/1000)),  15)
 
         pygame.display.flip()
 
