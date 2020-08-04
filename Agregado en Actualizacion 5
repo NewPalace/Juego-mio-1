@@ -1,0 +1,3 @@
+- Se agrego un Menu y los controles necesarios para la navegacion interna.
+- Se creo el modulo de MenuPrincipal y ModoScore.
+- Se arreglo bug que hacia que los soldados no bajen vida a la muralla en la parte inferior de esta.
