@@ -2,6 +2,7 @@ from ModoScore import ModoScore1
 from ModoAsalto import ModoAsalto1
 from variable import sc_ancho, sc_largo, bax, bay, ticK
 from clases import vida
+from Controles import MostrarContoles
 import pygame
 
 def Menu():
@@ -15,11 +16,13 @@ def Menu():
         Texto_22 = vida(bax+60,sc_ancho//2+35)
         Texto_3 = vida(bax+60,sc_ancho//2+70)
         Texto_4 = vida(bax+60, sc_ancho//2+105)
+        Texto_5 = vida(bax+60, sc_ancho//2+150)
         Texto_1.draw_text(screen, "Defiende la muralla!!", 65)
         Texto_2.draw_text(screen, "Presiona el numero del modo que quieres jugar.", 25)
         Texto_22.draw_text(screen, "1.- Modo Score", 25)
         Texto_3.draw_text(screen, "2.- Modo Asalto Rapido", 25)
         Texto_4.draw_text(screen,"3.- Modo Oleadas(WP)",25)
+        Texto_5.draw_text(screen, "(C) Controles", 20)
         pygame.display.flip()
         waiting = True
         while waiting:
@@ -35,3 +38,7 @@ def Menu():
                     if event.key == pygame.K_2:
                         waiting =  False
                         ModoAsalto1(screen)
+                    
+                    if event.key == pygame.K_c:
+                        waiting = False
+                        MostrarContoles(screen)

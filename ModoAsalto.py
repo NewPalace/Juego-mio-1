@@ -80,14 +80,14 @@ def ModoAsalto1(screen):
                                 
             
             if Primeravez > 0 :
-                Texto_1 = vida(bax+200,sc_ancho//3)
+                Texto_1 = vida(bax+220,sc_ancho//3)
                 Texto_2 = vida(bax+300,sc_ancho//2)
-                Texto_22 = vida(bax+ 200, sc_ancho//2)
+                Texto_22 = vida(bax+ 190, sc_ancho//2)
                 Texto_3 = vida(bax+200,sc_ancho*2//3)
-                Texto_31 = vida(bax+190, sc_ancho//2 +25)
-                Texto_32 = vida(bax+280, sc_ancho//2+35)
+                Texto_31 = vida(bax+190,sc_ancho//2 +25)
+                Texto_32 = vida(bax+280, sc_ancho//2+25)
                 Texto_1.draw_text(screen, "Great!", 65)
-                Texto_22.draw_text(screen, "Tiempo: ", 25)
+                Texto_22.draw_text(screen, "Tiempo:         segundos", 25)
                 Texto_2.draw_text(screen, str(round((Time2 - Time)/1000)), 25)
                 Texto_31.draw_text(screen, "Hiciste             Puntos!", 25)
                 Texto_32.draw_text(screen, str(score), 25)
