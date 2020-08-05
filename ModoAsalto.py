@@ -1,14 +1,14 @@
 import pygame, random
 from clases import Player, General1, Lancero1, Lancero2, vida
 from clases import  Fondo, Muro1, Barra1, imagenblock, Escudo
-from variable import white,skyblue, green, black,green, sc_ancho, sc_largo, ticK, Textbarup, bax, bay, Nfle, Lanlvl1, explanlv1
+from variable import white,skyblue, green, black,green, sc_ancho, sc_largo, ticK, Textbarup, bax, bay, Nfle, explanlv1O
 from variable import mflefir, mflenor, vidamuralla
 from Imagenes import  Icono
 from Controles import Fnormal, F_fuego, F_normal
 
-def ModoScore1(screen):
+def ModoAsalto1(screen):
     from MenuPrincipal import Menu
-    from variable import BalleSpeed
+    from variable import Lanlvl1_wave, BalleSpeed
     pygame.init()
     screen = pygame.display.set_mode([sc_largo, sc_ancho])
     clock = pygame.time.Clock()
@@ -40,24 +40,27 @@ def ModoScore1(screen):
     Normal = True
     Fuego = False
     game_over = True
-    Win = False
     done = False
     Primeravez = 0
     while not done:
         #------------------------------------------------------------------Gameovers
         if game_over:
             if Primeravez == 0:
-                Texto_1 = vida(bax+150,sc_ancho//3)
+                Texto_1 = vida(bax+100,sc_ancho//3)
                 Texto_2 = vida(bax+60,sc_ancho//2)
                 Texto_22 = vida(bax+60,sc_ancho//2+25)
                 Texto_3 = vida(bax+200,sc_ancho*2//3)
-                Texto_1.draw_text(screen, "Modo Score", 65)
-                Texto_2.draw_text(screen, "- Pierdes si se te acaban las flechas o te quedas sin vida", 25)
-                Texto_22.draw_text(screen, "- Ganas si completas el cuadro celeste (score)", 25)
+                Texto_31 = vida(bax+60,sc_ancho//2+50)
+                Texto_32 = vida(bax+60, sc_ancho//2+75)
+                Texto_1.draw_text(screen, "Modo Asalto Rapido", 65)
+                Texto_2.draw_text(screen, "- Se acaba cuando se te acaban las flechas o te quedas sin vida", 25)
+                Texto_22.draw_text(screen, "- Por cada 10 de score te dan 5 flechas y se aumentan 2 enemigos", 25)
+                Texto_31.draw_text(screen, "- Por cada 10 de score se aumenta tu velocidad",25)
+                Texto_32.draw_text(screen, "- Solo hay flechas normales y lancero lvl.1 en este modo", 25)
                 Texto_3.draw_text(screen, "Start(SPACE)      Back(b)", 20)
                 pygame.display.flip()
                 waiting = True
-                
+                Generador = 10
                 escudo.shield = vidamuralla
                 while waiting:
                     clock.tick(ticK)
@@ -77,15 +80,21 @@ def ModoScore1(screen):
                                 
             
             if Primeravez > 0 :
-                Texto_1 = vida(bax+100,sc_ancho//3)
-                Texto_2 = vida(bax+180,sc_ancho//2)
+                Texto_1 = vida(bax+200,sc_ancho//3)
+                Texto_2 = vida(bax+300,sc_ancho//2)
+                Texto_22 = vida(bax+ 200, sc_ancho//2)
                 Texto_3 = vida(bax+200,sc_ancho*2//3)
-                Texto_1.draw_text(screen, "Defeated", 65)
-                Texto_2.draw_text(screen, "Let's try again! or try another mode...", 25)
+                Texto_31 = vida(bax+190, sc_ancho//2 +25)
+                Texto_32 = vida(bax+280, sc_ancho//2+35)
+                Texto_1.draw_text(screen, "Great!", 65)
+                Texto_22.draw_text(screen, "Tiempo: ", 25)
+                Texto_2.draw_text(screen, str(round((Time2 - Time)/1000)), 25)
+                Texto_31.draw_text(screen, "Hiciste             Puntos!", 25)
+                Texto_32.draw_text(screen, str(score), 25)
                 Texto_3.draw_text(screen, "Again(SPACE)     Menu(m)", 20)
                 pygame.display.flip()
                 waiting = True
-                
+                Generador = 10
                 escudo.shield = vidamuralla
                 while waiting:
                     clock.tick(ticK)
@@ -118,73 +127,16 @@ def ModoScore1(screen):
  
             #generacion de enemigos (se pasara a una clase cuando se termine)
             #Lanceros 1
-            for i in range(Lanlvl1):
+
+            for i in range(Lanlvl1_wave):
                 lazul = Lancero1()
                 lancerolvl1.add(lazul)
                 all_sprites.add(lazul)
+
             
             #Lanceros 2
             #Aca iria el loop que generaria los lanceros
-            #Time = 0
             
-            
-
-        if Win == True:
-            Texto_1 = vida(bax+190,sc_ancho//3)
-            Texto_2 = vida(bax+340,sc_ancho//2)
-            texto_22 = vida(bax+ 240, sc_ancho//2)
-            Texto_3 = vida(bax+130,sc_ancho//2+25)
-            Texto_4 = vida(bax+200,sc_ancho*2//3)
-            Texto_1.draw_text(screen, "Ganaste!", 65)
-            texto_22.draw_text(screen, "Tiempo: ", 25)
-            Texto_2.draw_text(screen, str(round((Time2 - Time)/1000)), 25)
-            Texto_3.draw_text(screen, "Buen tiempo loco, lo podras mejorar?", 25)
-            Texto_4.draw_text(screen, "Again(SPACE)     Menu(m)", 20)
-            pygame.display.flip()
-            waiting = True
-            
-            escudo.shield = vidamuralla
-            while waiting:
-                clock.tick(ticK)
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                    if event.type == pygame.KEYUP:
-                        if event.key == pygame.K_SPACE:
-                            waiting = False
-                            Time = 0
-                            Time = pygame.time.get_ticks()
-                        if event.key == pygame.K_m:
-                            waiting = False
-                            Menu()
-        
-            Primeravez = Primeravez + 1
-            Win = False
-
-            #Guardado de sprites
-            all_sprites = pygame.sprite.Group()
-            lancerolvl1 = pygame.sprite.Group()
-            lancerolvl2 = pygame.sprite.Group()
-            bullets = pygame.sprite.Group()
-            bullets2 = pygame.sprite.Group()
-
-            all_sprites.add(escudo)
-            score = 0
-            Flechas = Nfle
- 
-            #generacion de enemigos (se pasara a una clase cuando se termine)
-            #Lanceros 1
-            for i in range(Lanlvl1):
-                lazul = Lancero1()
-                lancerolvl1.add(lazul)
-                all_sprites.add(lazul)
-            
-            #Lanceros 2
-            #Aca iria el loop que generaria los lanceros
-
-            #Time = 0
-            #Time = pygame.time.get_ticks()
-            #tiempo.draw_text(screen, Time, 34 )
 
         #----------------------------------------------------------------------------
         for event in pygame.event.get():
@@ -195,8 +147,8 @@ def ModoScore1(screen):
                     Normal = True
                     Fuego = False
                 if event.key == F_fuego:
-                    Normal = False
-                    Fuego = True
+                    Normal = True
+                    Fuego = False
 
                 if Normal == True:
                     if event.key == Fnormal:
@@ -210,8 +162,8 @@ def ModoScore1(screen):
                         Flechas -= mflefir
                         if Flechas <= 0:
                             game_over = True
-                    
-                    
+
+        
 
         #Imagen de fondo  
         screen.blit(fondo.image, fondo.rect)
@@ -224,17 +176,18 @@ def ModoScore1(screen):
             lazul = Lancero1()
             lancerolvl1.add(lazul)
             all_sprites.add(lazul)
-            score += explanlv1
+            score += explanlv1O
+            if score%10 ==0:
+                Flechas = Flechas + 5
 
         hits3 = pygame.sprite.groupcollide(lancerolvl1, bullets2, True, True)
         for hit in hits3:
             lazul = Lancero1()
             lancerolvl1.add(lazul)
             all_sprites.add(lazul)
-            score += explanlv1
-
-        if score == 100:
-            Win = True
+            score += explanlv1O
+            if score%10 ==0:
+                Flechas = Flechas + 5
 
         ##Lancero 2
         #Aca iria el codigo que reconoce la colicion de el lancero con escudo y la flecha
@@ -270,20 +223,28 @@ def ModoScore1(screen):
         #Barra de movimientos
         screen.blit(barra.image, barra.rect)
         vida1.draw_shield_bar(screen, escudo.shield, green)
-        expe.draw_shield_bar(screen,score,skyblue)
+        expe.draw_shield_bar2(screen,skyblue)
         NumeroDeFlechas.draw_text(screen, str(Flechas), 15)
         TextoScore.draw_text2(screen, "Score", 15)
         NumeroScore.draw_text2(screen, str(score), 15)
+
 
         #General
         screen.blit(general.image, general.rect)
 
         #Reloj
-        
         Time2 = pygame.time.get_ticks()
         
         TextoTiempo.draw_text(screen, "Time: ", 15)
         tiempo.draw_text(screen, str(round((Time2 - Time)/1000)),  15)
+        if round((Time2 - Time)/1000) == Generador:
+            BalleSpeed = BalleSpeed+1
+            for i in range(2):
+                Generador = Generador+10
+                lazul = Lancero1()
+                lancerolvl1.add(lazul)
+                all_sprites.add(lazul) 
+
 
         pygame.display.flip()
 

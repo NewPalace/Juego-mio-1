@@ -36,7 +36,13 @@ mflefir = 2
 Nspeed = 10
 
 ##Enemigos
-#Cantidad de lanceros lvl1
-Lanlvl1 = 2
+#Modo Score:
+#Cantidad de lanceros lvl1 
+Lanlvl1 = 5
 #Cantidad de xp por matar a lanceros lvl1
 explanlv1 = 5
+#Modo Oleada:
+#Cantidad de lanceros lvl1 con el que empieza
+Lanlvl1_wave = 3
+#Cantidad de xp por matar a lanceros lvl1
+explanlv1O = 2

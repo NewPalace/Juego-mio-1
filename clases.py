@@ -1,5 +1,5 @@
 import pygame,random
-from variable import white, black, green, brown, sc_ancho, sc_largo,BalleSpeed, Nspeed, bax, bay, vidamuralla
+from variable import white, black, green, brown, sc_ancho, sc_largo, Nspeed, bax, bay, vidamuralla
 from Imagenes import General, background1,Ballesta_anim, Nflecha, Fflecha, muro1,barra, LanceroAC, LanceroAE, murolvl1, Protector
 from Controles import SubirUP, BajarDo, F_fuego, F_normal, Fnormal
 pygame.init()
@@ -99,13 +99,13 @@ class Player(pygame.sprite.Sprite):
             self.sheet.set_clip(pygame.Rect(clipped_rect))
         return clipped_rect
 
-    def update(self, direction):
+    def update(self, direction, BalleSpeed):
+
         if direction == 'up':
             if self.rect.y < 120:
                 pass
             else:
                 self.rect.y -= BalleSpeed 
-
         if direction == 'down':
             if self.rect.y > 590:
                 pass
@@ -129,38 +129,38 @@ class Player(pygame.sprite.Sprite):
         
         self.image = self.sheet.subsurface(self.sheet.get_clip())
 
-    def handle_event(self, event, normal, fuego):
+    def handle_event(self, event, normal, fuego, BalleSpeed):
         #Agregat otro if para disparar con el mouse
         if event.type == pygame.KEYDOWN:
 
             if event.key == SubirUP:
-                self.update('up')
+                self.update('up', BalleSpeed)
             if event.key == BajarDo:
-                self.update('down') 
+                self.update('down', BalleSpeed) 
 
             if normal == True:
                 if event.key == Fnormal:
-                    self.update('Fnormal D')
+                    self.update('Fnormal D', 0 )
             if fuego == True:
                 if event.key == Fnormal:
-                    self.update('Ffire D')
+                    self.update('Ffire D', 0)
 
         if event.type == pygame.KEYUP:
 
             if event.key == SubirUP:
-                self.update('stop')
+                self.update('stop', 0)
             if event.key == BajarDo:
-                self.update('stop') 
+                self.update('stop', 0 ) 
             if event.key == F_normal:
-                self.update('Fnormal R')
+                self.update('Fnormal R', 0 )
             if event.key == F_fuego:
-                self.update('Ffire R')
+                self.update('Ffire R', 0 )
             if normal == True: 
                 if event.key == Fnormal:
-                    self.update('Fnormal R')
+                    self.update('Fnormal R', 0 )
             if fuego == True:
                 if event.key == Fnormal:
-                    self.update('Ffire R')
+                    self.update('Ffire R', 0 )
 
     def Nshoot(self, bullets, all_sprites):
         bullet = NArrows(self.rect.right, self.rect.centery,Nflecha )
@@ -270,9 +270,22 @@ class vida(pygame.sprite.Sprite):
         pygame.draw.rect(surface, color, self.fill)
         surface.blit(self.image, self.rect)
 
+    def draw_shield_bar2(self,surface, color):  
+        self.fill = 83
+        self.fill = pygame.Rect(self.rect.x,self.rect.y+5,70,self.fill)
+        pygame.draw.rect(surface, color, self.fill)
+        surface.blit(self.image, self.rect)
+
     def draw_text(self,surface, text, size):
         self.font = pygame.font.SysFont("serif", size)
         self.text_surface = self.font.render(text, True, white)
+        self.text_rect = self.text_surface.get_rect()
+        self.text_rect = (self.rect.x, self.rect.y)
+        surface.blit(self.text_surface, self.text_rect)
+
+    def draw_text2(self,surface, text, size):
+        self.font = pygame.font.SysFont("serif", size)
+        self.text_surface = self.font.render(text, True, black)
         self.text_rect = self.text_surface.get_rect()
         self.text_rect = (self.rect.x, self.rect.y)
         surface.blit(self.text_surface, self.text_rect)
